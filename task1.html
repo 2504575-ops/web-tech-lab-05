@@ -1,0 +1,127 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+    <title>Basic Calculator</title> 
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, skyblue, skyblue);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .calculator {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 10px 25px black;
+            text-align: center;
+            width: 350px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border: 1px solid white;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            border: none;
+            border-radius: 8px;
+            background-color: rgb(118, 240, 81);
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: rgb(77, 247, 153);
+            transform: scale(1.05);
+        }
+
+        #output {
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head> 
+
+<body> 
+
+<div class="calculator">
+    <h2>Basic Calculator</h2> 
+
+    <input type="number" id="firstValue" placeholder="Enter First Number"> 
+    <input type="number" id="secondValue" placeholder="Enter Second Number"> 
+
+    <br>
+
+    <button onclick="compute('+')">Add</button> 
+    <button onclick="compute('-')">Subtract</button> 
+    <button onclick="compute('*')">Multiply</button> 
+    <button onclick="compute('/')">Divide</button>
+
+    <h3 id="output"></h3> 
+</div>
+
+<script> 
+function compute(action){ 
+
+    let valueOne = document.getElementById("firstValue").value; 
+    let valueTwo = document.getElementById("secondValue").value; 
+    let displayArea = document.getElementById("output");
+
+    if (valueOne === "" || valueTwo === "") {
+        displayArea.innerHTML = "Error: Please enter both numbers!";
+        displayArea.style.color = "red";
+        return;
+    }
+
+    valueOne = Number(valueOne);
+    valueTwo = Number(valueTwo);
+    let finalResult;
+
+    if (action === "+") {
+        finalResult = valueOne + valueTwo;
+        displayArea.innerHTML = "Sum = " + finalResult;
+    } 
+    else if (action === "-") {
+        finalResult = valueOne - valueTwo;
+        displayArea.innerHTML = "Difference = " + finalResult;
+    } 
+    else if (action === "*") {
+        finalResult = valueOne * valueTwo;
+        displayArea.innerHTML = "Product = " + finalResult;
+    } 
+    else if (action === "/") {
+
+        if (valueTwo === 0) {
+            displayArea.innerHTML = "Error: Cannot divide by zero!";
+            displayArea.style.color = "red";
+            return;
+        }
+
+        finalResult = valueOne / valueTwo;
+        displayArea.innerHTML = "Quotient = " + finalResult;
+    }
+
+    displayArea.style.color = "green";
+}
+</script> 
+ 
+</body> 
+</html>

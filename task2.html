@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Number Checker</title>
+
+    <style>
+        body {
+            font-family: Tahoma, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            width: 320px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            margin-bottom: 15px;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 15px;
+        }
+
+        button {
+            padding: 8px 18px;
+            border: none;
+            border-radius: 8px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #388E3C;
+        }
+
+        #outputText {
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Number Checker</h2>
+
+    <input type="number" id="userNumber" placeholder="Enter a number">
+    <br>
+    <button onclick="analyzeNumber()">Check</button>
+
+    <div id="outputText"></div>
+</div>
+
+<script>
+function analyzeNumber() {
+
+    let inputData = document.getElementById("userNumber").value;
+    let resultDisplay = document.getElementById("outputText");
+
+    if (inputData === "") {
+        alert("Please enter a number first!");
+        return;
+    }
+
+    let convertedNumber = parseInt(inputData);
+    let typeText = (convertedNumber % 2 === 0) ? "Even" : "Odd";
+
+    if (convertedNumber > 0) {
+        resultDisplay.style.color = "green";
+        resultDisplay.innerHTML = typeText + " and Positive Number";
+    }
+    else if (convertedNumber < 0) {
+        resultDisplay.style.color = "red";
+        resultDisplay.innerHTML = typeText + " and Negative Number";
+    }
+    else {
+        resultDisplay.style.color = "blue";
+        resultDisplay.innerHTML = "Zero (Neither Positive nor Negative)";
+    }
+}
+</script>
+
+</body>
+</html>

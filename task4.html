@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Marks System</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: lightgray;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .card {
+            background-color: white;
+            width: 550px;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px black;
+            text-align: center;
+        }
+
+        h2 {
+            color: rgb(86, 86, 253);
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            background-color: rgb(151, 253, 151);
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: rgb(124, 238, 124);
+        }
+
+        .result {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .student {
+            background-color: whitesmoke;
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 6px;
+        }
+
+        .summary {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: lightyellow;
+            border-radius: 8px;
+        }
+
+        .similar {
+            background-color: lightblue;
+            padding: 6px;
+            margin: 3px 0;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Student Marks Report</h2>
+    <button onclick="showStudents()">Show Results</button>
+
+    <div class="result" id="output"></div>
+</div>
+
+<script>
+function showStudents() {
+    let students = [
+        { name: "Ali", marks: 85 },
+        { name: "Sara", marks: 92 },
+        { name: "Ahmed", marks: 78 },
+        { name: "Hina", marks: 85 },
+        { name: "Bilal", marks: 92 }
+    ];
+
+    let total = 0;
+    let topper = students[0];
+
+    let outputDiv = document.getElementById("output");
+    outputDiv.innerHTML = "<h3>All Students:</h3>";
+
+    for (let student of students) {
+        outputDiv.innerHTML += `
+            <div class="student">
+                Name: ${student.name} <br>
+                Marks: ${student.marks}
+            </div>
+        `;
+        total += student.marks;
+
+        if (student.marks > topper.marks) {
+            topper = student;
+        }
+    }
+
+    let average = total / students.length;
+
+    outputDiv.innerHTML += `
+        <div class="summary">
+            <strong>Average Marks:</strong> ${average.toFixed(2)} <br>
+            <strong>Topper:</strong> ${topper.name} (${topper.marks} marks)
+        </div>
+    `;
+
+   
+    let similarityDiv = "<h3>Students with Similar Marks:</h3>";
+    let grouped = {};
+
+    
+    for (let student of students) {
+        if (!grouped[student.marks]) grouped[student.marks] = [];
+        grouped[student.marks].push(student.name);
+    }
+
+    for (let marks in grouped) {
+        if (grouped[marks].length > 1) {
+            similarityDiv += `<div class="similar">Marks ${marks}: ${grouped[marks].join(", ")}</div>`;
+        }
+    }
+
+    outputDiv.innerHTML += similarityDiv;
+}
+</script>
+
+</body>
+</html>
